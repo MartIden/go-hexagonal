@@ -7,6 +7,6 @@ import (
 
 func main() {
 	if appSettings, err := settings.GetAppSettings(); err == nil {
-		cmd.Start(appSettings)
+		cmd.StartApp(appSettings)
 	}
 }

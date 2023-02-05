@@ -11,7 +11,7 @@ import (
 	"github.com/MartIden/go-hexagonal/core/store/sqlstore"
 )
 
-func Start(settings *settings.AppSettings) error {
+func StartApp(settings *settings.AppSettings) error {
 	connector := corePostgres.GetPostgresConnector(settings)
 	db, err := databases.GetDB(connector, settings)
 	
@@ -20,9 +20,9 @@ func Start(settings *settings.AppSettings) error {
 		return err
 	}
 
-	migration := corePostgres.CreatePostgresMigration(db)
+	migrations := corePostgres.CreatePostgresMigration(db)
 	
-	if err := migration.Down(); err != nil {
+	if err := migrations.Up(); err != nil {
 		log.Fatalln(err.Error())
 		return err
 	}
