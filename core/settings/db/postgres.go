@@ -13,10 +13,6 @@ type PostgresSettings struct {
 	SslMode  string `env:"PG_SSL_mode" envDefault:"disable"`
 }
 
-func (pgs *PostgresSettings) GetDsn() string {
-	return ""
-}
-
 func (pgs *PostgresSettings) InitFromEnv() error {
 	if err := env.Parse(pgs); err != nil {
 		return err

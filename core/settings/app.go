@@ -10,8 +10,7 @@ type AppSettings struct {
 	Port      int    `env:"PORT" envDefault:"3000"`
 	BindAddr  string `env:"BIND_ADDR" envDefault:"0.0.0.0:${PORT}" envExpand:"true"`
 	Env       string `env:"ENVIRON"`
-	SqlDriver string `env:"SQL_DRIVER"`
-	Postgress *dbSettings.PostgresSettings
+	Postgres *dbSettings.PostgresSettings
 }
 
 func GetAppSettings() (*AppSettings, error) {
@@ -26,6 +25,6 @@ func GetAppSettings() (*AppSettings, error) {
 		return nil, pgErr
 	}
 
-	appSettings.Postgress = pgSettings
+	appSettings.Postgres = pgSettings
 	return &appSettings, nil
 }

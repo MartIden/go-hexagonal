@@ -5,7 +5,7 @@ import (
 
 	"github.com/MartIden/go-hexagonal/core/settings"
 
-	_ "github.com/jackc/pgx"
+	_ "github.com/lib/pq"
 )
 
 type IDBConnectable interface {

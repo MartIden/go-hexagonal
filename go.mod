@@ -6,6 +6,7 @@ require github.com/jackc/pgx v3.6.2+incompatible
 
 require (
 	github.com/caarlos0/env/v7 v7.0.0 // indirect
+	github.com/golang-migrate/migrate v3.5.4+incompatible // indirect
 	github.com/golang-migrate/migrate/v4 v4.15.2 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect

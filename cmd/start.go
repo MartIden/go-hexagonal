@@ -1,10 +1,8 @@
 package cmd
 
 import (
+	"log"
 	"net/http"
-
-	_ "github.com/golang-migrate/migrate/v4/source/file"
-	_ "github.com/jackc/pgx"
 
 	"github.com/MartIden/go-hexagonal/core/databases"
 	corePostgres "github.com/MartIden/go-hexagonal/core/databases/postgres"
@@ -18,16 +16,17 @@ func Start(settings *settings.AppSettings) error {
 	db, err := databases.GetDB(connector, settings)
 	
 	if err != nil {
+		log.Fatalln(err.Error())
 		return err
 	}
 
-	//Migrations
-	// driver, err := postgres.WithInstance(db, &postgres.Config{})
-	// m, err := migrate.NewWithDatabaseInstance(
-    //     "file:///migrations/postgres",
-    //     connector.GetDriverName(), driver)
-    // m.Up()
-
+	migration := corePostgres.CreatePostgresMigration(db)
+	
+	if err := migration.Down(); err != nil {
+		log.Fatalln(err.Error())
+		return err
+	}
+		
 	store := sqlstore.New(db)
 	srv := server.NewServer(*store)
 	return http.ListenAndServe(settings.BindAddr, srv)

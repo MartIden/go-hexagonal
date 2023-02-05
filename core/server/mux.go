@@ -29,6 +29,5 @@ func NewServer(store sqlstore.Store) *MuxServer {
 func (srv *MuxServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	srv.router.ServeHTTP(w, r)
 }
-func (srv *MuxServer) configureRouter() {
 
-}
+func (srv *MuxServer) configureRouter() {}
