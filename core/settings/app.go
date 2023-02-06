@@ -14,11 +14,11 @@ type AppSettings struct {
 }
 
 func includePostrgesSettings(appSettings *AppSettings) error {
-	if pgSettings, pgErr := dbSettings.GetPostrgesSettings(); pgErr == nil {
+	if pgSettings, err := dbSettings.GetPostrgesSettings(); err == nil {
 		appSettings.Postgres = pgSettings
 		return nil
 	} else {
-		return pgErr
+		return err
 	}
 }
 
